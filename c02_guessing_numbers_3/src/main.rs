@@ -6,21 +6,25 @@ fn main() {
 
     // 生成 4 个随机数字
 
-    let mut random = vec![10, 10, 10, 10];
-
-    fn random_number(random: &[u8]) -> u8 {
-        let n = rand::thread_rng().gen_range(0, 10);
-        for i in 0..random.len() {
-            if random[i] < 10 && random[i] == n {
-                return random_number(random);
-            }
-        }
-        return n;
-    }
+    let mut random: [u8; 4] = [0, 0, 0, 0];
 
     for i in 0..random.len() {
-        random[i] = random_number(&random);
-        // print!("{}", random[i]);
+        random[i] = {
+            let mut n;
+            loop {
+                n = rand::thread_rng().gen_range(0, 10);
+                let mut flag = false;
+                for j in 0..i {
+                    if random[j] == n {
+                        flag = true;
+                        break;
+                    }
+                }
+                if flag { continue; }
+                break;
+            }
+            n
+        };
     }
 
     let mut times = 0;
@@ -56,8 +60,6 @@ fn main() {
         let mut right = 0;
         let mut position = 0;
 
-        // let guessing = guessing[..];
-
         for i in 0..guessing.len() {
             let g: u8 = guessing[i..i+1].parse().expect("解析失败");
             for j in 0..random.len() {
@@ -77,5 +79,4 @@ fn main() {
 
         println!("第{}次: 你猜的数字是: {}   {}个数字正确, {}个数字位置也正确", times, guessing, right, position);
     }
-
 }
