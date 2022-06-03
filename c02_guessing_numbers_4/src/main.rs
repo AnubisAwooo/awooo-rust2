@@ -4,30 +4,6 @@ use std::io;
 fn main() {
     println!("游戏开始！！！");
 
-    let x: [u8; 2] = [1, 2];
-    let [x1, x2] = x;
-    println!("x: {:?}", x);
-
-    let y: [String; 2] = [String::from("1"), String::from("2")];
-    let z: &str = "3";
-    let zz: &str = &z[..];
-    // let [y1, y2] = y;
-    let y1 = y[0];
-    let yy = &y[..];
-    println!("y: {:?}", y);
-
-    let mut q = [1, 2, 3];
-    let qq = &q[..];
-    let mut qqq = &mut q[..];
-    qqq[1] = 1;
-    // println!("q: {:?}", qq);
-    // q[0] = 1;
-    // println!("q: {:?}", qq);
-
-    // let w = (1, 2, 3);
-    let ww = &w(..); // &(i32,i32,32)
-    let www = &w(0..1); // &(i32)
-
     // 生成 4 个随机数字
 
     let mut random: [u8; 4] = [0, 0, 0, 0];
