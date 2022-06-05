@@ -2,7 +2,7 @@ use rand::Rng;
 use std::io;
 
 fn main() {
-    println!("游戏开始！！！");
+    println!("游戏开始！！！");   
 
     // 生成 4 个随机数字
 
@@ -12,32 +12,31 @@ fn main() {
         random[i] = random_number(&random[..i]);
     }
 
-    let mut times = 0;
-    loop {
-        times += 1;
-
-        if times > 8 {
-            println!("没猜出来，你输了！");
-            break;
-        }
-
-        let guessing = match read_guess() {
-            Some(v) => v,
-            None => {
-                times -= 1;
-                continue;
-            },
+    for times in 1..9 {
+        let guessing = loop {
+            match read_guess() {
+                Some(v) => break v,
+                None => continue,
+            };
         };
 
         let (right, position) = check(&guessing, &random);
 
         if position == 4 {
-            println!("你猜的数字是: {}  你猜对了，真厉害！！！ 只用了 {} 次机会", guessing, times);
-            break;
+            println!(
+                "你猜的数字是: {}  你猜对了，真厉害！！！ 只用了 {} 次机会",
+                guessing, times
+            );
+            return;
         }
 
-        println!("第{}次: 你猜的数字是: {}   {}个数字正确, {}个数字位置也正确", times, guessing, right, position);
+        println!(
+            "第{}次: 你猜的数字是: {}   {}个数字正确, {}个数字位置也正确",
+            times, guessing, right, position
+        );
     }
+
+    println!("没猜出来，你输了！");
 }
 
 fn random_number(random: &[u8]) -> u8 {
@@ -80,7 +79,7 @@ fn check(guessing: &String, random: &[u8; 4]) -> (u8, u8) {
     let mut position = 0;
 
     for i in 0..guessing.len() {
-        let g: u8 = guessing[i..i+1].parse().expect("解析失败");
+        let g: u8 = guessing[i..i + 1].parse().expect("解析失败");
         for j in 0..random.len() {
             if random[j] == g {
                 right += 1;
