@@ -6,7 +6,7 @@ struct Counter {
 }
 
 impl Counter {
-    fn current(&self) -> u32 {
+    fn _current(&self) -> u32 {
         self.current
     }
 }
@@ -42,7 +42,7 @@ impl Iterator2 for Counter {
 fn main() {
     println!("Hello, world!");
 
-    let map: HashMap<String, String> = HashMap::new();
+    let _map: HashMap<String, String> = HashMap::new();
 
     // let _v = &map["123"];
 
@@ -57,5 +57,5 @@ fn main() {
         current: 1,
         max: 10,
     };
-    let o = Iterator2::next(c);
+    let _o = Iterator2::next(c);
 }
